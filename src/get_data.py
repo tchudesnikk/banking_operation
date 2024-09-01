@@ -1,13 +1,14 @@
+from datetime import datetime
 from io import open
 from json import load
+import os
 from operations import Operation
-from datetime import datetime
 
 
-def get_formatted_date(date: str):
+def get_formatted_date(date: str, format_date: str):
     """ Форматируем дату из в строки в тип DateType """
 
-    return datetime.strptime(date[0:10], "%Y-%m-%d")
+    return datetime.strptime(date[0:10], format_date)
 
 
 def get_hide_numbers(value: str):
@@ -43,7 +44,7 @@ def get_data_from_json():
     """ Получает данные из JSON и возвращает список классов """
     operations = []
 
-    with open('operations.json', encoding='utf-8') as json_file:
+    with open(os.path.abspath("operations_account.json"), encoding='utf-8') as json_file:
         data_operations = load(json_file)
 
     for data_operation in data_operations:
@@ -51,7 +52,7 @@ def get_data_from_json():
         try:
             operation = Operation(data_operation['id'],
                                   data_operation['state'],
-                                  get_formatted_date(data_operation['date']),
+                                  get_formatted_date(data_operation['date'], "%Y-%m-%d"),
                                   data_operation['operationAmount']['amount'],
                                   data_operation['operationAmount']['currency']['name'])
         except KeyError:
