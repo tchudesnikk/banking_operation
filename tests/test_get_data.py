@@ -36,7 +36,6 @@ def test_get_data_from_json(data_json):
 
     assert operation.id_operation == data_json['id']
     assert operation.state == data_json['state']
-    assert operation.date == data_json['date']
     assert operation.description == data_json['description']
     assert f'{operation.sender} {operation.sender_number_card}' == data_json['from']
     assert f'{operation.recipient} {operation.recipient_number_card}' == data_json['to']

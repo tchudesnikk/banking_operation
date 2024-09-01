@@ -12,7 +12,7 @@ def sorted_operation():
 
 
 operations = get_data_from_json()
-delete_canceled_operation()
-successful_transactions = sorted_operation()
+delete_canceled_operation(operations)
+successful_transactions = sorted_operation(operations)
 for operation in successful_transactions:
     print(operation)
